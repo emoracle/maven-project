@@ -4,7 +4,7 @@ pipeline {
     tools {
         maven 'localMaven'
     }
-    
+
     stages {
          stage('Build'){
             steps {
@@ -22,7 +22,7 @@ pipeline {
              timeout(time:5, unit:'DAYS'){
                  input message: "Keur deployment goed"
              }
-             build job: 'Deploy-to-staging'
+             build job: 'deploy-to-staging'
            }
            post {
                success {
