@@ -3,8 +3,7 @@ pipeline {
     stages {
         stage('Build'){
             steps {
-                bat "set m2_home=C:/Progs/apache-maven-3.6.0"
-                bat "mvn clean package"
+                bat "c:/Progs/apache-maven-3.6.0/bin/mvn clean package"
             }
             post {
                 success {
