@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build'){
             steps {
-                bat "c:/Progs/apache-maven-3.6.0/bin/mvn clean package"
+                bat "mvn clean package"
             }
             post {
                 success {
@@ -14,7 +14,19 @@ pipeline {
         }
         stage('Deploy to Tomcat'){
            steps {
-           build job: 'Deploy-to-staging'
+             timeout(time:5, unit:'DAYS'){
+                 input message: "Keur deployment goed"
+             }
+             build job: 'Deploy-to-staging'
+           }
+           post {
+               success {
+                   echo "Deployed naar productie"
+               }
+
+               failure {
+                   echo "Deployment mislukt"
+               }
            }
         }
     }
